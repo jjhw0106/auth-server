@@ -1,4 +1,4 @@
-package com.my_back_office.auth_server.infra;
+package com.my_back_office.auth_server.infra.member;
 
 import com.my_back_office.auth_server.domain.member.Member;
 import com.my_back_office.auth_server.domain.member.vo.Email;

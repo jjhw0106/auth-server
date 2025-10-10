@@ -3,7 +3,7 @@ package com.my_back_office.auth_server.application.service;
 import com.my_back_office.auth_server.application.port.in.SignUpUseCaseITF;
 import com.my_back_office.auth_server.domain.member.Member;
 import com.my_back_office.auth_server.domain.member.vo.Email;
-import com.my_back_office.auth_server.infra.MemberRepository;
+import com.my_back_office.auth_server.infra.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

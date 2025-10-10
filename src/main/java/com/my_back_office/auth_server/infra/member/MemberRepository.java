@@ -1,11 +1,12 @@
-package com.my_back_office.auth_server.infra;
+package com.my_back_office.auth_server.infra.member;
 import com.my_back_office.auth_server.application.port.out.MemberRepositoryITF;
 import com.my_back_office.auth_server.domain.member.Member;
 import com.my_back_office.auth_server.domain.member.vo.Email;
+import com.my_back_office.auth_server.infra.jpa.MemberJpaRepository;
+import com.my_back_office.auth_server.infra.jpa.RefreshJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.io.Console;
 import java.util.*;
 
 @Repository
@@ -13,6 +14,7 @@ import java.util.*;
 public class MemberRepository implements MemberRepositoryITF {
 
     private final MemberJpaRepository memberJpaRepository;
+
     @Override
     public Member save(Member member) {
         MemberEntity entity = MemberEntity.fromDomain(member);

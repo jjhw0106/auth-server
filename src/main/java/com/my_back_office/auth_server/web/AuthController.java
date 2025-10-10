@@ -31,10 +31,14 @@ public class AuthController {
         System.out.println("login!!");
         LoginUseCaseITF.LoginCommand command = new LoginUseCaseITF.LoginCommand(request.getEmail(), request.getPassword());
 
-        loginService.login(command);
+        // access token 발급
+        String accessToken = loginService.login(command).accessToken();
 
+        // 응답 헤더에 토큰 담음
+        response.addHeader("Authorization", "Bearer " + accessToken);
+
+        // 응답 본문 전달(사용자 정보, 메시지)
         return new ResponseEntity<>(request.getEmail(), HttpStatus.OK);
-//        return loginService.login(new {req.getUsername(), req.getPassword()});
     }
 
     @PostMapping("/sign-up")
