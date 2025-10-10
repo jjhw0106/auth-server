@@ -16,22 +16,21 @@ public class RefreshTokenRepository implements RefreshTokenRepositoryITF {
     private final RefreshJpaRepository repository;
 
     @Override
+    /*
+    * 최초 로그인일 경우 refreshToken 저장
+    * 이미 refreshToken 발급되어 있으면, memberId로 조회 후 token 업데이트*/
     public RefreshToken save(RefreshToken refreshToken) {
         RefreshTokenEntity entityToSave = RefreshTokenEntity.fromDomain(refreshToken);
 
-        // DB에서 memberId를 기준으로 기존 토큰을 찾습니다.
         Optional<RefreshTokenEntity> existingTokenOpt = repository.findByMemberId(refreshToken.getMemberId());
 
         if (existingTokenOpt.isPresent()) {
-            // 기존 토큰이 있으면, 그 토큰의 ID를 그대로 사용하고 값만 갱신합니다.
             RefreshTokenEntity existingEntity = existingTokenOpt.get();
             existingEntity.updateTokenValue(entityToSave.getRefreshToken());
 
-            // save를 호출하면 ID가 있으므로 UPDATE 쿼리가 실행됩니다.
             RefreshTokenEntity updatedEntity = repository.save(existingEntity);
             return updatedEntity.toDomain();
         } else {
-            // 기존 토큰이 없으면, 새로 저장합니다. INSERT 쿼리가 실행됩니다.
             RefreshTokenEntity savedEntity = repository.save(entityToSave);
             return savedEntity.toDomain();
         }
