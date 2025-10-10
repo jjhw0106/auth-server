@@ -47,9 +47,6 @@ public class RefreshToken {
         return expirationTime.isBefore(Instant.now());
     }
 
-    // --- 정적 팩토리 메서드 (Infra Entity와의 변환은 Mapper/Impl에서 처리) ---
-
-    // 이 객체는 생성 시 DB에 저장될 때 사용될 수 있습니다.
     public static RefreshToken createNew(String tokenValue, Long memberId) {
         return RefreshToken.builder()
             .memberId(memberId)
