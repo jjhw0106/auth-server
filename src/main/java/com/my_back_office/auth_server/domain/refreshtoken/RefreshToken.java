@@ -12,7 +12,7 @@ import java.util.Date;
 @Getter
 public class RefreshToken {
 
-    // Refresh Token의 도메인 식별자 (DB의 PK와 다를 수 있지만 여기선 Long 타입으로 통일)
+    // Refresh Token의 도메인 식별자
     private final Long id;
 
     // 이 토큰이 누구의 것인지 식별하는 ID

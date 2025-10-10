@@ -9,8 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 public record HashedPassword(String value) {
 
-    // Spring Security의 Bcrypt 구현체를 사용하는 것이 표준적입니다.
-    // 실제로는 Bean으로 주입받아 사용하는 것이 좋습니다.
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     /**
@@ -23,7 +21,6 @@ public record HashedPassword(String value) {
         if (plainPassword == null || plainPassword.isBlank()) {
             throw new IllegalArgumentException("Password must not be empty");
         }
-        // 내부적으로 비밀번호를 해싱합니다.
         String hashedPassword = passwordEncoder.encode(plainPassword);
         return new HashedPassword(hashedPassword);
     }

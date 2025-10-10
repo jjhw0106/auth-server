@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "member")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE) // 빌더나 정적 팩토리 메서드를 통한 생성을 권장
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberEntity {
 
     @Id

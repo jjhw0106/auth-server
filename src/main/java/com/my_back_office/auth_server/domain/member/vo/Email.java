@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
  */
 public record Email(String value) {
 
-    // RFC 5322 기반의 간단한 이메일 정규식
     private static final Pattern PATTERN = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
 
     /**

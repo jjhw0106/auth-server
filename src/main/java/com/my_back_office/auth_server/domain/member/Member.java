@@ -7,12 +7,12 @@ import java.time.LocalDateTime;
 
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE) // 생성자는 private으로 외부 접근을 막습니다.
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Member {
 
     private final Long memberId; // DB에서 생성된 후 할당되는 ID
     private final Email email;
-    private HashedPassword password; // 비밀번호는 변경 가능성이 있으므로 final이 아님
+    private HashedPassword password;
     private String nickname;
     private Role role;
     private Status status;
@@ -20,7 +20,6 @@ public class Member {
     private final String providerId; // 소셜 가입 시에만 존재
     private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-// 1. 생성자 대신 정적 팩토리 메서드를 사용해 객체 생성의 의도를 명확히 합니다.
 
     /**
      * 로컬(자체) 회원가입을 위한 생성 메서드
@@ -58,9 +57,9 @@ public class Member {
             email,
             password,
             nickname,
-            Role.valueOf(role),      // String → Enum 변환
-            Status.valueOf(status),   // String → Enum 변환
-            Provider.valueOf(provider), // String → Enum 변환
+            Role.valueOf(role),
+            Status.valueOf(status),
+            Provider.valueOf(provider),
             providerId,
             createdAt,
             updatedAt
@@ -87,9 +86,6 @@ public class Member {
             LocalDateTime.now()
         );
     }
-
-
-    // 2. Setter 대신 행위(Behavior)를 나타내는 메서드를 제공합니다.
 
     /**
      * 비밀번호를 확인하는 행위 (로그인 시 사용)
