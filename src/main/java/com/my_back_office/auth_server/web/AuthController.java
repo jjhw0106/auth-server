@@ -7,6 +7,7 @@ import com.my_back_office.auth_server.application.service.SignUpService;
 import com.my_back_office.auth_server.web.dto.LoginRequestDTO;
 import com.my_back_office.auth_server.web.dto.LoginRequestDTO;
 import com.my_back_office.auth_server.web.dto.SignUpRequestDTO;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,9 +34,14 @@ public class AuthController {
 
         // access token 발급
         String accessToken = loginService.login(command).accessToken();
+        Cookie cookie = new Cookie("accessToken", accessToken);
 
-        // 응답 헤더에 토큰 담음
-        response.addHeader("Authorization", "Bearer " + accessToken);
+        // httpOnly 설정
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setMaxAge(60 * 60);
+
+        response.addCookie(cookie);
 
         // 응답 본문 전달(사용자 정보, 메시지)
         return new ResponseEntity<>(request.getEmail(), HttpStatus.OK);
