@@ -26,5 +26,4 @@ public class SignUpService implements SignUpUseCaseITF {
         Member newMember = Member.localRegister(emailToSignUp, command.password(), command.nickname());
         memberRepository.save(newMember);
     }
-
 }

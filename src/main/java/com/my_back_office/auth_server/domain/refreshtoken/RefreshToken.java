@@ -12,16 +12,12 @@ import java.util.Date;
 @Getter
 public class RefreshToken {
 
-    // Refresh Token의 도메인 식별자
     private final Long id;
 
-    // 이 토큰이 누구의 것인지 식별하는 ID
     private final Long memberId;
 
-    // Refresh Token의 실제 문자열 값
     private final String refreshToken;
 
-    // 생성 시간
     private final Date createdAt;
 
     @Builder

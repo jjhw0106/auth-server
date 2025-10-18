@@ -66,9 +66,6 @@ public class Member {
         );
     }
 
-    /**
-     * 소셜 회원가입을 위한 생성 메서드
-     */
     public static Member socialRegister(Email email, String nickname, Provider provider, String providerId) {
         if (provider == Provider.LOCAL) {
             throw new IllegalArgumentException("Social register cannot be LOCAL provider.");
@@ -87,9 +84,6 @@ public class Member {
         );
     }
 
-    /**
-     * 비밀번호를 확인하는 행위 (로그인 시 사용)
-     */
     public void authenticate(String plainPassword) {
         if (this.provider != Provider.LOCAL) {
             throw new IllegalStateException("Only LOCAL members can authenticate with password.");
@@ -98,10 +92,6 @@ public class Member {
             throw new IllegalArgumentException("Password does not match.");
         }
     }
-
-    /**
-     * 닉네임을 변경하는 행위
-     */
     public void changeNickname(String newNickname) {
         if (newNickname == null || newNickname.isBlank()) {
             throw new IllegalArgumentException("Nickname cannot be empty.");
@@ -110,9 +100,6 @@ public class Member {
         this.updatedAt = LocalDateTime.now();
     }
 
-    /**
-     * 계정을 정지시키는 행위
-     */
     public void ban() {
         this.status = Status.BANNED;
         this.updatedAt = LocalDateTime.now();
