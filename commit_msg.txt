@@ -1,0 +1,7 @@
+feat: 보안 강화 및 다중 프로파일 환경 구축
+
+- .gitignore 최적화: IDE 설정 및 .env 등 민감 정보 노출 차단
+- 과거 히스토리 삭제: 기존 application.yml에 노출된 비밀번호 기록 완전 제거
+- 프로파일 분리: application.yml을 공통/local/dev로 분리하여 환경별 관리 체계 수립
+- .env 기반 환경변수 관리: DB 비밀번호 및 JWT 시크릿을 외부 변수로 격리
+- 자동 프로파일 감지: SPRING_PROFILES_ACTIVE 변수를 통한 실행 환경 자동화
