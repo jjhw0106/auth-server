@@ -50,15 +50,21 @@ public class AuthController {
     @PostMapping("/sign-up")
     public ResponseEntity<Object> signUp(@RequestBody SignUpRequestDTO request) {
         System.out.println("signup!!");
-        SignUpUseCaseITF.SignUpCommand command = new SignUpUseCaseITF.SignUpCommand(
-            request.getEmail(),
-            request.getPassword(),
-            request.getNickName()
-        );
+        try {
+            SignUpUseCaseITF.SignUpCommand command = new SignUpUseCaseITF.SignUpCommand(
+                request.getEmail(),
+                request.getPassword(),
+                request.getNickName()
+            );
 
-        signUpService.signUp(command);
+            signUpService.signUp(command);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (IllegalArgumentException e) {
+            // 이메일 중복 등의 유효성 검증 실패
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Map.of("message", e.getMessage()));
+        }
     }
 
     /*게이트웨이 실행 안시켰을 때, CORS 등록*/

@@ -44,6 +44,7 @@ public class MemberRepository implements MemberRepositoryITF {
 
     @Override
     public boolean existsMemberByEmail(Email email) {
-        return false;
+        String emailValue = email.value();
+        return memberJpaRepository.existsByEmail(emailValue);
     }
 }
