@@ -37,6 +37,6 @@ public class LoginService implements LoginUseCaseITF {
 
         refreshTokenRepository.save(refreshToken);
 
-        return new LoginResult(accessToken, refreshToken);
+        return new LoginResult(accessToken, refreshToken, member.getNickname(), member.getRole().name());
     }
 }

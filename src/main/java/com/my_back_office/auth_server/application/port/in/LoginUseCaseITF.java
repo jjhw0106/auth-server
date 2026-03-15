@@ -7,5 +7,5 @@ public interface LoginUseCaseITF {
 
     record LoginCommand(String email, String password) {}
 
-    record LoginResult(String accessToken, RefreshToken refreshToken) {}
+    record LoginResult(String accessToken, RefreshToken refreshToken, String nickname, String role) {}
 }

@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.my_back_office.auth_server.web.dto.LoginResponseDTO;
+
 import java.util.Map;
 
 @Slf4j
@@ -32,19 +34,18 @@ public class AuthController {
         System.out.println("login!!");
         LoginUseCaseITF.LoginCommand command = new LoginUseCaseITF.LoginCommand(request.getEmail(), request.getPassword());
 
-        // access token 발급
-        String accessToken = loginService.login(command).accessToken();
-        Cookie cookie = new Cookie("accessToken", accessToken);
+        LoginUseCaseITF.LoginResult result = loginService.login(command);
 
-        // httpOnly 설정
+        // access token을 HttpOnly 쿠키로 전달
+        Cookie cookie = new Cookie("accessToken", result.accessToken());
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
         cookie.setMaxAge(60 * 60);
-
         response.addCookie(cookie);
 
-        // 응답 본문 전달(사용자 정보, 메시지)
-        return new ResponseEntity<>(request.getEmail(), HttpStatus.OK);
+        // 응답 본문: 사용자 정보 객체
+        LoginResponseDTO responseDTO = new LoginResponseDTO(request.getEmail(), result.nickname(), result.role());
+        return ResponseEntity.ok(responseDTO);
     }
 
     @PostMapping("/sign-up")
