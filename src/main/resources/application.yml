@@ -7,6 +7,12 @@ spring:
   
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:local} # 환경변수가 없으면 local 사용
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
 
   # 공통 JPA 설정
   jpa:
