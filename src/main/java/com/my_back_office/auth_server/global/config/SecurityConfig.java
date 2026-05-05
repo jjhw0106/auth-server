@@ -15,9 +15,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                // Gateway가 CORS를 처리하므로 Auth Server에서는 비활성화
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-//                .cors(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
                 .securityMatcher("/**")
                 .authorizeHttpRequests(
         auth -> auth
